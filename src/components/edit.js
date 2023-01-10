@@ -152,14 +152,16 @@ const updatePost=useMutation(editPosts,{
     onSuccess:()=>{
       if( /^\s*\s*$/.test(title) || !/[A-Za-z]/.test(title)){
            
-         alert("Error!..pls enter the title")
+        //  alert("Error!..pls enter the title")
+        setSubmitted(true)
         queryClient.cancelQueries('post')
         //editPosts.cancel()
         // isError()
        
       }if( /^\s*\s*$/.test(body) || !/[A-Za-z]/.test(body)){
            
-             alert("Error! pls enter the body")
+             //alert("Error! pls enter the body")
+             setSubmitted(true)
             // queryClient.cancelQueries('post')
             //editPosts.cancel()
             //  isError()
@@ -312,7 +314,7 @@ const errors={}
               /> 
               </div>
             {/* {errors.title && touched.title ? <p className='error'>Please enter a title</p> : null }  */}
-             { /^\s*\s*$/.test(title) || !/[A-Za-z]/.test(title) ?<p className='error'>Please enter a title</p> : null}
+             { submitted && /^\s*\s*$|^(?:(?![A-Za-z]).)*$/.test(title) ?<p className='error'>Please enter a title</p> : null}
 
               <div>
               <label><strong>Body:</strong></label>  
@@ -325,7 +327,7 @@ const errors={}
                 /> 
               </div> 
             {/* {errors.body && touched.body  ? <p className='error'>Please enter a body</p> : null }  */}
-            { /^\s*\s*$/.test(body) || !/[A-Za-z]/.test(body) ? <p className='error'>Please enter a body</p> : null}
+            { submitted && /^\s*\s*$|^(?:(?![A-Za-z]).)*$/.test(body)  ? <p className='error'>Please enter a body</p> : null}
 
               <Link type='submit' className="btn btn-warning mr-3"  
               // to='/rq-super-heroes'
