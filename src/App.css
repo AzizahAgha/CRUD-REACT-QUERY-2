@@ -72,6 +72,11 @@ input{
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
-    width: 15%;
-    display: inline;
+  
+    /* display: inline; */
+}
+
+.form-group{
+  margin-left:35% ;
+  margin-right: 35%;
 }
