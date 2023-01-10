@@ -9,6 +9,7 @@ import { HomePage } from './components/homepage';
 import { EditPost } from './components/edit';
 
 import './App.css';
+import { Page } from './components/paginated';
 
 const queryClient = new QueryClient()
 
@@ -29,7 +30,11 @@ function App() {
             </li>
              
             <li className='li'>
-              <Link to='/rq-super-heroes' className=" btn btn-primary btn-xs">List Post</Link>
+              <Link to='/rq-super-heroes' className=" btn btn-primary btn-xs">Edit Post</Link>
+            </li>
+          
+            <li className='li'>
+              <Link to='/rq-paginated' className=" btn btn-primary btn-xs">List Posts</Link>
             </li>
           
         </ul>
@@ -40,6 +45,7 @@ function App() {
         <Route className='btn btn-primary' path='/rq-super-heroes' element={<ListPost />}></Route>
         <Route path="/list" element={<List />}></Route>
         <Route path="/edit/:id" element={<EditPost />}></Route>
+        <Route path="/rq-paginated" element={<Page />}></Route>
         <Route path="/rq-super-heroes/:postId" ></Route>
         
       </Routes>
