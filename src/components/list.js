@@ -27,6 +27,7 @@ const successMessage={
 
 export default function List(){
     const [visible,setVisible]=useState(false);
+    const [submitted,setSubmitted]=useState(false);
     const [title,setTitle]=useState('');
     const [body,setBody]=useState('');
 
@@ -53,11 +54,13 @@ export default function List(){
         console.log({title,body})
         const post={title,body}
 
-        if(/^\s*\s*$/.test(title) || !/[A-Za-z]/.test(title)){
-            alert("Error...pls enter the title")
+        if(/^\s*\s*$|^(?:(?![A-Za-z]).)*$/.test(title)){
+           // alert("Error...pls enter the title")
+            setSubmitted(true)
 
         } if(/^\s*\s*$/.test(body) || !/[A-Za-z]/.test(body)){
-        alert("pls enter the body")
+       // alert("pls enter the body")
+        setSubmitted(true)
         }else{
             mutate(post)
         onSuccess()
@@ -119,11 +122,13 @@ export default function List(){
         {visible ?<div style={successMessage}>Data has been added Successfully!</div>:null}
         <hr></hr>
 
-        <div >
+        <div className='form-group'>
             <input className='int' type='text' placeholder='Enter the title' value={title} onChange={(e)=>setTitle(e.target.value)} ></input>
-            {/* { /^\s*\s*$/.test(title) || !/[A-Za-z]/.test(title) ? <p className='error'>Pls enter title</p>:null } */}
+            {submitted&& /^\s*\s*$|^(?:(?![A-Za-z]).)*$/.test(title) ? <p className='error'>Pls enter title</p>:null }
+            <br></br>
             <input className='int' type='text' placeholder='Enter the body' value={body} onChange={(e)=>setBody(e.target.value)} ></input>
-            {/* { /^\s*\s*$/.test(body) || !/[A-Za-z]/.test(body) ? <p className='error'>Pls enter title</p>:null } */}
+            {submitted && /^\s*\s*$|^(?:(?![A-Za-z]).)*$/.test(body)? <p className='error'>Pls enter title</p>:null }
+            <br></br>
             <button class="btn btn-success" onClick={addPostOnClick}>Add</button>
         </div>
         <br></br>
